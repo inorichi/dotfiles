@@ -1,0 +1,18 @@
+#
+# These things are run when an Openbox X Session is started.
+# You may place a similar script in $HOME/.config/openbox/autostart
+# to run user-specific things.
+#
+
+#Apply system settings
+xrdb -merge ~/.Xresources &
+xmodmap ~/.xmodmap &
+gnome-keyring-daemon &
+
+#Start panel and widgets
+tint2 &
+batti &
+volumeicon &
+
+#Restore wallpaper
+nitrogen --restore &

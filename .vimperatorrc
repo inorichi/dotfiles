@@ -1,0 +1,48 @@
+"3.8.1 (created: 2013/11/21 23:49:14)
+
+highlight CmdLine background: #121112; color:#D0CFD0;
+highlight CompDesc width: 500px; max-width: 500px; color: #465457;
+highlight CompGroup background: #121112; color:#D0CFD0;
+highlight CompItem background:#121112; color:#D0CFD0;
+highlight CompItem[selected] color: #FF9926; background: #262426;
+highlight CompMsg margin-left: 16px;
+highlight CompTitle background: #1c1b1c; font-weight: bold;
+highlight CompTitle>* color: #D0CFD0; padding: 1px 0.5ex;
+highlight ContentSeparator border-top: 1px solid #262426; display: -moz-box;
+highlight ErrorMsg background: #D7005F; color: #D0CFD0; font-weight: bold;
+highlight Filter color: #FF8700; background: #262426;
+highlight Hint font-family: Helvetica; font-size: 11px; font-weight: bold; color: #302505; text-transform: uppercase; padding: 0 2px 0 2px; background-color: #FFD76E; border: solid 1px #AD810C;
+highlight HintElem background-repeat: none;
+highlight Indicator color: #D7005F;
+highlight InfoMsg background: #121112; color: #87FF00;
+highlight ModeMsg color: white; background: #3E6700; border-radius: 1px; padding: 0px 5px;
+highlight MoreMsg background-color: #121112; color: #87FF00;
+highlight NonText color: #B973FF; min-height: 16px; padding-left: 2px;
+highlight Normal background: #121112; color:#D0CFD0;
+highlight Null color: #005F87;
+highlight Number color: #005F87;
+highlight PromptText color: white; background: #860EFF;
+highlight StatusLine color: #D0CFD0; background: transparent; font-weight: normal;
+highlight Tag color: #005F87;
+highlight Title background-color: #D7005F; color: #D0CFD0; font-weight: bold;
+highlight URL text-decoration: none; color: #87FF00;
+highlight WarningMsg background: #121112; color: #D7005F;
+nnoremap j 6j
+nnoremap k 6k
+nnoremap l 6l
+nnoremap h 6h
+nnoremap J gT
+nnoremap K gt
+nnoremap x d
+nnoremap d <C-d>
+nnoremap u <C-u>
+nnoremap X u
+nnoremap Y ;y
+nnoremap <C-y> ;Y
+set complete=sl
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+set hintinputs=value
+set newtab=all
+source! /home/len/.vimperatorrc.local
+
+" vim: set ft=vimperator:
