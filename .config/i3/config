@@ -1,0 +1,222 @@
+##### Basic settings #####
+
+set $mod Mod4
+
+font pango:DejaVu Sans Mono 7
+
+client.focused           #4c7899 #285577 #ffffff #aaaaaa
+client.focused_inactive  #333333 #222222 #ffffff #484e50
+client.unfocused #333333 #222222 #888888 #292d2e
+client.urgent #2f343a    #900000 #ffffff #900000
+client.background        #161616
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+new_window pixel 2
+new_float pixel 2
+
+force_display_urgency_hint 100 ms
+
+workspace_auto_back_and_forth yes
+default_orientation vertical
+
+# start dmenu (a program launcher)
+bindsym $mod+Return exec dmenu_run -fn "DejaVu Sans Mono:medium:pixelsize=15" -nb "#121212" -nf "#696969" -sb "#696969" -sf "#E0E0E0"
+bindsym $mod+p exec dmenu_run -fn "DejaVu Sans Mono:medium:pixelsize=15" -nb "#121212" -nf "#696969" -sb "#696969" -sf "#E0E0E0"
+
+
+##### Windows management #####
+
+# kill focused window
+bindsym $mod+c kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Right resize grow width 10 px or 10 ppt
+
+# move focused window
+bindsym $mod+Mod1+h move left
+bindsym $mod+Mod1+j move down
+bindsym $mod+Mod1+k move up
+bindsym $mod+Mod1+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Mod1+Left move left
+bindsym $mod+Mod1+Down move down
+bindsym $mod+Mod1+Up move up
+bindsym $mod+Mod1+Right move right
+
+# resize window
+mode "resize" {
+        bindsym h           resize shrink width 10 px or 10 ppt
+        bindsym j           resize grow height 10 px or 10 ppt
+        bindsym k           resize shrink height 10 px or 10 ppt
+        bindsym l           resize grow width 10 px or 10 ppt
+
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+##### Tiling #####
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+slash layout stacking
+bindsym $mod+period layout tabbed
+bindsym $mod+comma layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Mod1+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+d focus child
+
+
+##### Workspaces ######
+
+set $WS1 1 web
+set $WS2 2 code
+set $WS3 3 term
+set $WS4 4 chat
+set $WS5 5 skype
+set $WS6 6 media
+set $WS7 7 misc
+
+# switch to workspace
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Mod1+1 move container to workspace $WS1
+bindsym $mod+Mod1+2 move container to workspace $WS2
+bindsym $mod+Mod1+3 move container to workspace $WS3
+bindsym $mod+Mod1+4 move container to workspace $WS4
+bindsym $mod+Mod1+5 move container to workspace $WS5
+bindsym $mod+Mod1+6 move container to workspace $WS6
+bindsym $mod+Mod1+7 move container to workspace $WS7
+bindsym $mod+Mod1+8 move container to workspace 8
+bindsym $mod+Mod1+9 move container to workspace 9
+bindsym $mod+Mod1+0 move container to workspace 10
+
+bindsym $mod+Tab workspace back_and_forth
+
+bindsym $mod+s scratchpad show
+bindsym $mod+Mod1+s move scratchpad
+
+
+
+##### i3 config management #####
+
+# reload the configuration file
+bindsym $mod+Mod1+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Mod1+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+##### Status bar #####
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3status
+        position top
+        colors {
+                background #000000
+                statusline #ffffff
+                separator #848484
+                focused_workspace #424242 #000000 #eeeeee # focused, on current screen
+                active_workspace #888888 #5f676a #ffffff # focused, on another screen
+                inactive_workspace #424242 #000000 #888888 # inactive on all screens
+                urgent_workspace #839496 #dc322f #ffffff
+        }
+}
+
+
+
+##### Own commands #####
+
+bindsym $mod+g exec --no-startup-id quickswitch.py
+
+# Program shortcuts
+set $shortcut "(1)Firefox (2)Sublime (3)Termite (4)Weechat (5)Skype (6)vp"
+mode $shortcut {
+        bindsym 1    exec firefox; mode "default"
+        bindsym 2    exec subl3; mode "default"
+        bindsym 3    exec termite; mode "default"
+        bindsym 4    workspace $WS4; exec termite -e weechat; mode "default"
+        bindsym 5    exec skype; mode "default"
+        bindsym 6    exec vp; mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+e mode $shortcut
+
+# Volume keys
+bindsym XF86AudioMute        exec --no-startup-id amixer -q set Master toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%- 
+
+#Launch app
+bindsym $mod+w exec termite
+bindsym $mod+q exec firefox
+
+
+##### Certain programs behaviour #####
+assign [class="Firefox"] $WS1
+assign [class="Subl3"] $WS2
+assign [class="Skype"] $WS5
+
+#Touhou
+assign [title="Touhou Eiyashou.*"] $WS6
+for_window [title="Touhou Eiyashou.*"] floating enable
+
+# Use floating window for notifications
+for_window [class="Xfce4-notifyd"] floating enable; border none; focus mode_toggle
+
+##### Startup programs #####
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id xmodmap /home/len/.xmodmap2
+exec --no-startup-id nm-applet
+exec --no-startup-id sleep 30 && dropboxd

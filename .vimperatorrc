@@ -39,6 +39,8 @@ nnoremap u <C-u>
 nnoremap X u
 nnoremap Y ;y
 nnoremap <C-y> ;Y
+nnoremap W ]]
+nnoremap Q [[
 set complete=sl
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set hintinputs=value
