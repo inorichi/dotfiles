@@ -9,8 +9,8 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Monospace 7
-scrollback_lines = 1000
+font = DejaVu Sans Mono 10
+scrollback_lines = 10000
 search_wrap = true
 #icon_name = terminal
 #geometry = 640x480
@@ -32,38 +32,45 @@ browser = firefox
 #size_hints = false
 
 [colors]
-foreground = #ededed
+foreground = #eddcd3
 foreground_bold = #ffffff
 #foreground_dim = #888888
-background = #111111
+background = #181512
 #cursor = #dcdccc
 
 # if unset, will reverse foreground and background
-highlight = #2f2f2f
+highlight = #3f3f3f
 
 # colors from color0 to color254 can be set
-color0 = #000000
-color1 = #aa0000
-color2 = #00aa00
-color3 = #aa5500
-color4 = #0000aa
-color5 = #aa00aa
-color6 = #00aaaa
-color7 = #aaaaaa
-color8 = #555555
-color9 = #ff5555
-color10 = #55ff55
-color11 = #ffff55
-color12 = #94bff3
-color13 = #ff55ff
-color14 = #55ffff
-color15 = #ffffff
 
-[hints]
-#font = Monospace 7
-#foreground = #dcdccc
-#background = #3f3f3f
-#padding = 2
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0
+#BLK
+color0 =     #303030
+color8 =     #686868
+
+#RED
+color9 =     #FFA7DA
+color1 =     #D370A3
+
+#GRN
+color10 =    #A3D572
+color2 =     #6D9E3F
+
+#BLU
+color12 =    #98CBFE
+color4 =     #6095C5
+
+#YEL
+color11 =    #EFBD8B
+color3 =     #B58858
+
+#CYN
+color14 =    #75DAA9
+color6 =     #3BA275
+
+#MAG
+color13 =    #E5B0FF
+color5 =     #AC7BDE
+
+#WHT
+color7 =     #CFCFCF
+color15 =    #FFFFFF

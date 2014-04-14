@@ -4,12 +4,11 @@ promptinit
 colors
 
 # Show git branch and status in zsh
-source ~/.zsh/git-prompt/zshrc.sh
+#source ~/.zsh/git-prompt/zshrc.sh
 
 
 # Prompt
-PROMPT="[%n@%m %{$fg[green]%}%~%{$reset_color%}]$ "
-RPROMPT='%B%b$(git_super_status) '
+prompt pure
 
 
 # Zsh settings
@@ -17,6 +16,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors 'exfxcxdxbxegedabagacad'
 #setopt completealiases
 setopt HIST_IGNORE_DUPS
+setopt autocd
 source /usr/share/doc/pkgfile/command-not-found.zsh
 
 
