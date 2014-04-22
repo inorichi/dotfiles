@@ -15,6 +15,7 @@ while read -r line ; do
 		W*)
 			# bspwm internal state
 			wm_infos=""
+			monitor=""
 			IFS=':'
 			set -- ${line#?}
 			while [ $# -gt 0 ] ; do
@@ -23,15 +24,15 @@ while read -r line ; do
 				case $item in
 					O*)
 						# focused occupied desktop
-						wm_infos="$wm_infos \\u1\\br\\f2 ${name} \\ur"
+						wm_infos="$wm_infos $monitor\\br\\f2 ${name} \\ur"
 						;;
 					F*)
 						# focused free desktop
-						wm_infos="$wm_infos \\u1\\br\\f2 ${name} \\ur"
+						wm_infos="$wm_infos $monitor\\br\\f2 ${name} \\ur"
 						;;
 					U*)
 						# focused urgent desktop
-						wm_infos="$wm_infos \\u1\\br\\f2 ${name} \\ur"
+						wm_infos="$wm_infos $monitor\\br\\f2 ${name} \\ur"
 						;;
 					o*)
 						# occupied desktop
@@ -43,12 +44,13 @@ while read -r line ; do
 						;;
 					u*)
 						# urgent desktop
-						wm_infos="$wm_infos \\u9\\br\\f0 ${name} \\ur"
+						wm_infos="$wm_infos \\u3\\br\\f0 ${name} \\ur"
 						;;
-					L*)
-						# layout
-						layout=$(printf "%s" "${name}" | sed 's/\(.\).*/\U\1/')
-						wm_infos="$wm_infos    \\br\\f0$layout"
+					M*)
+						monitor="\\u1"
+						;;
+					m*)
+						monitor=""
 						;;
 				esac
 				shift

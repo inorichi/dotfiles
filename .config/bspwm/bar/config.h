@@ -21,8 +21,8 @@
 #define COLOR0 0xa3a6ab // default text
 #define COLOR1 0x78a4ff // icon color
 #define COLOR2 0xf6f9ff // active desktop
-#define COLOR3 0x6d561c // urgent
-#define COLOR4 0x6a9fb5  
+#define COLOR3 0xcc6666 // urgent
+#define COLOR4 0x6a9fb5
 #define COLOR5 0xaa759f
 #define COLOR6 0x75b5aa
 #define COLOR7 0x6c7a80
