@@ -7,4 +7,11 @@ total_run_times 0
 use_spacer none
 
 TEXT
-S\r${if_mpd_playing}\f1 \f0${mpd_artist} - ${mpd_title} \f2 |  ${endif}\f1 \f0${cpu cpu0}% \f2 |  \f1 \f0${memperc}% \f2 |  \f1 \f0${hwmon temp 1}°C \f2 |  \f1 \f0${downspeedf eth0}kb/s \f2 |  \f1 \f0${upspeedf eth0}kb/s \f2 |  \f1 \f0${exec pamixer --get-volume}% \f2 |  \f0${time %a %d %b}  \f1 \f0${time %H:%M}
+S\
+\r${if_mpd_playing}\f1 \f0${mpd_artist} - ${mpd_title} \f2 |  ${endif}\
+\f1 \f0${cpu cpu0}% \f2 |  \f1 \f0${memperc}% \f2 |  \
+\f1 \f0${hwmon temp 1}°C \f2 |  \
+\f1 \f0${downspeedf eth0}kb/s \f2 |  \
+\f1 \f0${upspeedf eth0}kb/s \f2 |  \
+\f1 \f0${exec pamixer --get-volume}% \f2 |  \
+\f0${time %a %d %b}  \f1 \f0${time %H:%M}
