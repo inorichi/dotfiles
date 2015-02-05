@@ -1,0 +1,120 @@
+#
+# bspwm hotkeys
+#
+
+super + alt + Escape
+	bspc quit
+
+super + space
+	bspc monitor -f next
+
+super + c
+	bspc window -c
+
+super + t
+	bspc desktop -l next
+
+super + b
+	bspc desktop -B
+
+super + z
+    rotate.sh
+
+super + s
+	bspc window -t floating
+
+super + f
+	bspc window -t fullscreen; \
+    bspc control --get-status > $PANEL_FIFO
+
+super + Tab
+	bspc desktop -f last.local
+
+super + {o,i}
+	bspc control --record-history off; \
+	bspc window {older,newer} -f; \
+	bspc control --record-history on
+
+super + y
+	bspc window -w last.manual
+
+super + Return
+	bspc window -s biggest
+
+super + {_,alt + }{h,j,k,l}
+	bspc window -{f,s} {left,down,up,right}
+
+super + {apostrophe,backslash}
+	bspc window -f {next,prev}
+
+super + {period, slash}
+	bspc desktop -C {backward,forward}
+
+super + comma
+	bspc desktop -R 90
+
+super + bracket{left,right}
+	bspc desktop -f {prev,next}
+
+super + ctrl + {h,j,k,l}
+	bspc window -p {left,down,up,right}
+
+super + ctrl + {_,shift + }space
+	bspc {window -p cancel,desktop -c}
+
+super + {Right,Left}
+	S={+,-}; \
+	bspc window -e left $\{S\}40 || \
+	bspc window -e right $\{S\}40
+
+super + {Down,Up}
+	S={+,-}; \
+	bspc window -e down $\{S\}40 || \
+	bspc window -e up $\{S\}40
+
+super + ctrl + {1-9}
+	bspc window -r 0.{1-9}
+
+super + {_,alt + }{1-9,0}
+	bspc {desktop -f,window -d} ^{1-9,10}
+
+super + mod5 + {1-9,0}
+    bspc rule -a "*" -o desktop=$(bspc query -D -d ^{1-9,10})
+
+super + {minus,equal}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
+
+~button1
+	bspc pointer -g focus
+
+super + button{1-3}
+	bspc pointer -g {move,resize_side,resize_corner}
+
+super + !button{1-3}
+	bspc pointer -t %i %i
+
+super + @button{1-3}
+	bspc pointer -u
+
+#
+# wm independent hotkeys
+#
+
+super + p
+	dmenu_run -fn "DejaVu Sans Mono:medium:pixelsize=15" -nb "#111111" -nf "#aaaaaa" -sb "#555555" -sf "#E0E0E0"
+
+super + {q,w,e,r}
+	{firefox,termite,thunar,termite -e weechat}
+
+XF86Audio{Play,Stop,Next,Prev}
+	mpc {toggle,stop,next,prev}
+
+XF86Audio{Mute,RaiseVolume,LowerVolume}
+	amixer -q set Master {toggle,5%+,5%-}
+
+@{_,shift + }Print
+	maim {_,-s}
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
