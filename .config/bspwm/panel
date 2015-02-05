@@ -1,22 +1,36 @@
-#! /bin/sh
+#!/bin/bash
 
 if [ $(pgrep -cx panel) -gt 1 ] ; then
-	printf "%s\n" "The panel is already running." >&2
-	exit 1
+    printf "%s\n" "The panel is already running." >&2
+    exit 1
 fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
+
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
+
+. panel_colors
 
 bspc config top_padding $PANEL_HEIGHT
 
 bspc control --subscribe > "$PANEL_FIFO" &
-xtitle -sf 'T%s' > "$PANEL_FIFO" &
-conky -d -c "$HOME/.config/bspwm/conky-bar" > "$PANEL_FIFO" &
+conky -c "$HOME/bin/conky-bar" > "$PANEL_FIFO" &
+python "$HOME/bin/rss.py" > "$PANEL_FIFO" &
+sleep 1 && stalonetray &
 
+# Workaround for text not being near the bottom of the bar
+echo '' | bar -p -g 3840x20 -B "$COLOR_BACKGROUND" &
 
-cat "$PANEL_FIFO" | ~/.config/bspwm/panel_bar | bar &
+cat "$PANEL_FIFO" \
+    | panel_bar \
+    | bar \
+        -f "Roboto-10,Koruri-10,sm4tik" \
+        -F "$COLOR_FOREGROUND" \
+        -B "$COLOR_BACKGROUND" \
+        -g 3840x17 \
+        -u 2 &
+
 
 wait

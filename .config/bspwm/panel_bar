@@ -2,60 +2,87 @@
 #
 # Example panel for LemonBoy's bar
 
+. panel_colors
+
+num_mon=2
+
 while read -r line ; do
 	case $line in
 		S*)
-			# clock output
-			sys_infos="\\br\\fr${line#?}"
+			sys_infos="%{F$COLOR_STATUS_FG}%{B$COLOR_STATUS_BG} ${line#?} %{B-}%{F-}"
 			;;
-		T*)
-			# xtitle output
-			title="\\br\\f0${line#?}"
-			;;
+        R*)
+            rss="%{F#78a4ff} %{F#eddcd3}${line#?}  |  "
+            ;;
 		W*)
 			# bspwm internal state
 			wm_infos=""
-			monitor=""
+            curr_mon=1
+
+            # For moving the infos to the secondary monitor if the primary is in fullscreen
+            if [[ -n $(bspc query -T -d ^1:focused | grep "\+.*R .*F.*") ]]; then
+                sys_pos="%{S1}%{c}"
+            else
+                sys_pos="%{S0}%{r}"
+            fi
+
 			IFS=':'
 			set -- ${line#?}
 			while [ $# -gt 0 ] ; do
 				item=$1
 				name=${item#?}
 				case $item in
+					M*)
+						# active monitor
+						if [ $num_mon -gt 1 ] ; then
+                            if [ $curr_mon -gt 1 ] ; then
+                                wm_infos="$wm_infos%{S+}  "
+                            fi
+                            active_color="$COLOR_ACTIVE_MONITOR_BG"
+                            let curr_mon++
+						fi
+						;;
+					m*)
+						# inactive monitor
+						if [ $num_mon -gt 1 ] ; then
+                            if [ $curr_mon -gt 1 ] ; then
+                                wm_infos="$wm_infos%{S+}  "
+                            fi
+                            active_color="$COLOR_INACTIVE_MONITOR_BG"
+                            let curr_mon++
+						fi
+						;;
 					O*)
 						# focused occupied desktop
-						wm_infos="$wm_infos $monitor\\br\\f2 ${name} \\ur"
+						wm_infos="${wm_infos}%{F$COLOR_FOCUSED_OCCUPIED_FG}%{B$COLOR_FOCUSED_OCCUPIED_BG}%{U$active_color}%{+o} ${name} %{-o}%{B-}%{F-}  "
 						;;
 					F*)
 						# focused free desktop
-						wm_infos="$wm_infos $monitor\\br\\f2 ${name} \\ur"
+						wm_infos="${wm_infos}%{F$COLOR_FOCUSED_FREE_FG}%{B$COLOR_FOCUSED_FREE_BG}%{U$active_color}%{+o} ${name} %{-o}%{B-}%{F-}  "
 						;;
 					U*)
 						# focused urgent desktop
-						wm_infos="$wm_infos $monitor\\br\\f2 ${name} \\ur"
+						wm_infos="${wm_infos}%{F$COLOR_FOCUSED_URGENT_FG}%{B$COLOR_FOCUSED_URGENT_BG}%{U$active_color}%{+o} ${name} %{-o}%{B-}%{F-}  "
 						;;
 					o*)
 						# occupied desktop
-						wm_infos="$wm_infos \\br\\f0 ${name} "
+						wm_infos="${wm_infos}%{F$COLOR_OCCUPIED_FG}%{B$COLOR_OCCUPIED_BG} ${name} %{B-}%{F-}  "
 						;;
 					f*)
 						# free desktop
-						wm_infos="$wm_infos \\br\\f0 ${name} "
+						wm_infos="${wm_infos}%{F$COLOR_FREE_FG}%{B$COLOR_FREE_BG} ${name} %{B-}%{F-}  "
 						;;
 					u*)
 						# urgent desktop
-						wm_infos="$wm_infos \\u3\\br\\f0 ${name} \\ur"
+						wm_infos="${wm_infos}%{F$COLOR_URGENT_FG}%{B$COLOR_URGENT_BG} ${name} %{B-}%{F-}  "
 						;;
-					M*)
-						monitor="\\u1"
-						;;
-					m*)
-						monitor=""
+					L*)
+						# layout
 						;;
 				esac
 				shift
 			done
 			;;
 	esac
-	printf "%s\n" "\\l $wm_infos    |    $title \\r $sys_infos  "
+	printf "%s\n" "%{l}  ${wm_infos}${sys_pos}${rss}${sys_infos}"
 done

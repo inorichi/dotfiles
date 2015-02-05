@@ -1,4 +1,4 @@
-use_xft yes
+use_xft no
 out_to_x no
 background no
 out_to_console yes
@@ -8,10 +8,11 @@ use_spacer none
 
 TEXT
 S\
-\r${if_mpd_playing}\f1 \f0${mpd_artist} - ${mpd_title} \f2 |  ${endif}\
-\f1 \f0${cpu cpu0}% \f2 |  \f1 \f0${memperc}% \f2 |  \
-\f1 \f0${hwmon temp 1}°C \f2 |  \
-\f1 \f0${downspeedf eth0}kb/s \f2 |  \
-\f1 \f0${upspeedf eth0}kb/s \f2 |  \
-\f1 \f0${exec pamixer --get-volume}% \f2 |  \
-\f0${time %a %d %b}  \f1 \f0${time %H:%M}
+%{F\#78a4ff} %{F\#eddcd3}${cpu cpu0}%%  |  \
+%{F\#78a4ff} %{F\#eddcd3}${memperc}%%  |  \
+%{F\#78a4ff} %{F\#eddcd3}${hwmon temp 1}°C  |  \
+%{F\#78a4ff} %{F\#eddcd3}${downspeed eth0}  |  \
+%{F\#78a4ff} %{F\#eddcd3}${upspeed eth0}  |  \
+%{F\#78a4ff}${if_match "${exec pamixer --get-mute}" == "true"}${else}${endif} \
+%{F\#eddcd3}${exec pamixer --get-volume}  |  \
+%{F\#78a4ff} %{F\#eddcd3}${time %H:%M}
