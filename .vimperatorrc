@@ -11,7 +11,7 @@ highlight CompTitle>* color: #D0CFD0; padding: 1px 0.5ex;
 highlight ContentSeparator border-top: 1px solid #262426; display: -moz-box;
 highlight ErrorMsg background: #D7005F; color: #D0CFD0; font-weight: bold;
 highlight Filter color: #FF8700; background: #262426;
-highlight Hint font-family: Helvetica; font-size: 11px; font-weight: bold; color: #302505; text-transform: uppercase; padding: 0 2px 0 2px; background-color: #FFD76E; border: solid 1px #AD810C;
+highlight Hint font-family: Helvetica; font-size: 11px; font-weight: bold; color: #302505; text-transform: uppercase; padding: 0 2px 0 2px; background-color: #FFD76E; border: solid 1px #AD810C; max-height: 15px;
 highlight HintElem background-repeat: none;
 highlight Indicator color: #D7005F;
 highlight InfoMsg background: #121112; color: #87FF00;
@@ -45,6 +45,7 @@ set complete=sl
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set hintinputs=value
 set newtab=all
+set gui=nonavigation
 source! /home/len/.vimperatorrc.local
 
 " vim: set ft=vimperator:
