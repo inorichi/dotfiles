@@ -3,9 +3,13 @@ compinit
 promptinit
 colors
 
-# Show git branch and status in zsh
-#source ~/.zsh/git-prompt/zshrc.sh
-
+setopt append_history
+setopt share_history
+setopt hist_verify
+setopt hist_ignore_all_dups
+export HISTFILE="${HOME}"/.zsh-history
+export HISTSIZE=1000000
+export SAVEHIST=$HISTSIZE
 
 # Prompt
 prompt pure
@@ -20,22 +24,28 @@ setopt autocd
 source /usr/share/doc/pkgfile/command-not-found.zsh
 
 
+if [[ -f ~/.dircolors ]] && type -p dircolors >/dev/null; then
+eval $(dircolors -b "$HOME/.dircolors")
+fi
+
 # Private SSH server, sorry, but you don't need this
 source ~/.zsh/ssh.sh
 alias $SSH_ALIAS="ssh -fND 7777 $SSH_USER@$SSH_SERVER"
+alias ssh="TERM=xterm-256color ssh"
 
+export WORKON_HOME=~/.envs
+source /usr/bin/virtualenvwrapper.sh
 
 # Aliases
 alias ls='ls --color=auto'
+alias l='ls -la --color=auto'
 alias vnc="dbus-launch vncserver -geometry 1920x1080 :1"
 alias sudo="nocorrect sudo"
 alias yolo="sudo pacman -Syu"
 
-
 # Exports
 export EDITOR=vim
 export BROWSER=firefox
-
 
 # Key bindings
 
@@ -60,8 +70,8 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[End]}"      ]]  && bindkey  "${key[End]}"      end-of-line
 [[ -n "${key[Insert]}"   ]]  && bindkey  "${key[Insert]}"   overwrite-mode
 [[ -n "${key[Delete]}"   ]]  && bindkey  "${key[Delete]}"   delete-char
-[[ -n "${key[Up]}"       ]]  && bindkey  "${key[Up]}"       up-line-or-history
-[[ -n "${key[Down]}"     ]]  && bindkey  "${key[Down]}"     down-line-or-history
+[[ -n "${key[Up]}"       ]]  && bindkey  "${key[Up]}"       up-line-or-search
+[[ -n "${key[Down]}"     ]]  && bindkey  "${key[Down]}"     down-line-or-search
 [[ -n "${key[Left]}"     ]]  && bindkey  "${key[Left]}"     backward-char
 [[ -n "${key[Right]}"    ]]  && bindkey  "${key[Right]}"    forward-char
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-buffer-or-history
