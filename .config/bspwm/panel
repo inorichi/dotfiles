@@ -17,20 +17,18 @@ bspc config top_padding $PANEL_HEIGHT
 
 bspc control --subscribe > "$PANEL_FIFO" &
 conky -c "$HOME/bin/conky-bar" > "$PANEL_FIFO" &
-python "$HOME/bin/rss.py" > "$PANEL_FIFO" &
-sleep 1 && stalonetray &
-
-# Workaround for text not being near the bottom of the bar
-echo '' | bar -p -g 3840x20 -B "$COLOR_BACKGROUND" &
+python "$HOME/bin/unread.py" -m -r > "$PANEL_FIFO" &
+sleep 1 && trayer --edge top --align right --transparent true --alpha 0 --tint 0x111111 --widthtype pixel --width 200 --height 20 &
 
 cat "$PANEL_FIFO" \
     | panel_bar \
-    | bar \
+    | lemonbar \
         -f "Roboto-10,Koruri-10,sm4tik" \
         -F "$COLOR_FOREGROUND" \
         -B "$COLOR_BACKGROUND" \
-        -g 3840x17 \
-        -u 2 &
+        -g 3840x20 \
+        -u 2 \
+        -o -2 &
 
 
 wait

@@ -89,3 +89,27 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
+
+#if [[ $TERM == xterm-termite  ]]; then
+#    . /etc/profile.d/vte.sh
+#    __vte_osc7
+#fi
+#
+
+function use_virtualenv() {
+    if [ -e .venv ]; then
+        name=$(cat .venv)
+        if [ $VIRTUAL_ENV ]; then
+            if [ "$name" = "$(basename $VIRTUAL_ENV)" ]; then
+                return
+            fi
+        fi
+        workon $name
+    fi
+}
+function cd () {
+    builtin cd "$@" && use_virtualenv
+}
+
+# Call the function on .zshrc loaded
+use_virtualenv

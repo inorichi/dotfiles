@@ -8,8 +8,8 @@ use_spacer none
 
 TEXT
 S\
-%{F\#78a4ff} %{F\#eddcd3}${cpu cpu0}%%  |  \
-%{F\#78a4ff} %{F\#eddcd3}${memperc}%%  |  \
+%{F\#78a4ff} %{F\#eddcd3}${cpu cpu0}%  |  \
+%{F\#78a4ff} %{F\#eddcd3}${memperc}%  |  \
 %{F\#78a4ff} %{F\#eddcd3}${hwmon temp 1}°C  |  \
 %{F\#78a4ff} %{F\#eddcd3}${downspeed eth0}  |  \
 %{F\#78a4ff} %{F\#eddcd3}${upspeed eth0}  |  \
